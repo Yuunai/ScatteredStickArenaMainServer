@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>StickArena</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <style>
+        .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+            background-color: #dc3545;
+        }
+
+        .custom-control-input:focus~.custom-control-label::before {
+            box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem #dc354540;
+        }
+
+        .form-control:focus {
+            border-color: #efa8af;
+            box-shadow: 0 0 0 0.2rem #dc354540;
+        }
+
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid pb-0">
+        <div class="container">
+            <h1 class="display-4">StickArena</h1>
+            <p class="lead">fajna giereczka</p>
+        </div>
+        <nav class="navbar navbar-expand navbar-light">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-0 mx-sm-3">
+                        <a class="btn btn-outline-danger mr-1 mr-sm-2" href="https://github.com/Kosert/StickArena" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container">
+        <div id="success" class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Sukces!</h4>
+            <p>Twoje konto zostało aktywowane.</p>
+        </div>
+    </div>
+    <script>
+        setTimeout(function(){
+            window.location.href = "./"
+        }, 3000)
+    </script>
+</body>
+
+</html>
