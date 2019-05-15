@@ -1,1 +1,1 @@
-"# ScatteredStickArenaMainServer" 
+# ScatteredStickArenaMainServer
