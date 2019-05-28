@@ -8,7 +8,7 @@ window.onload = function () {
     var registerButton = document.getElementById('registerButton')
     registerButton.addEventListener('click', register)
 
-    var loginButton = document.getElementById('loginButton')
+    // var loginButton = document.getElementById('loginButton')
     loginButton.addEventListener('click', login)
 
     var registerEmail = document.getElementById('registerEmail')
@@ -38,16 +38,16 @@ window.onload = function () {
     checkPasswords()
     checkTerms()
 
-    document.getElementById('login').addEventListener('keypress', function (e) {
-        if (e.keyCode === 13) {
-            loginButton.click()
-        }
-    })
-    document.getElementById('password').addEventListener('keypress', function (e) {
-        if (e.keyCode === 13) {
-            loginButton.click()
-        }
-    })
+    // document.getElementById('login').addEventListener('keypress', function (e) {
+    //     if (e.keyCode === 13) {
+    //         loginButton.click()
+    //     }
+    // })
+    // document.getElementById('password').addEventListener('keypress', function (e) {
+    //     if (e.keyCode === 13) {
+    //         loginButton.click()
+    //     }
+    // })
 
     setTimeout(function () {
         if (detect())
@@ -179,43 +179,43 @@ window.onload = function () {
         }
     }
 
-    function login() {
-        document.getElementById('alertLogin').hidden = true
-        document.getElementById('loginButton').disabled = true
-        var form = document.getElementById('loginForm')
-        var inputs = form.getElementsByTagName('input')
+    // function login() {
+    //     document.getElementById('alertLogin').hidden = true
+    //     document.getElementById('loginButton').disabled = true
+    //     var form = document.getElementById('loginForm')
+    //     var inputs = form.getElementsByTagName('input')
 
-        var formData = {}
-        for (var i = 0; i < inputs.length; i++) {
-            formData[inputs[i].id] = inputs[i].value
-        }
+    //     var formData = {}
+    //     for (var i = 0; i < inputs.length; i++) {
+    //         formData[inputs[i].id] = inputs[i].value
+    //     }
 
-        var json = JSON.stringify(formData)
-        var xmlhttp = new XMLHttpRequest()
-        xmlhttp.open("POST", "login", true)
-        xmlhttp.setRequestHeader("Content-Type", "application/json")
-        xmlhttp.responseType = "json"
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                handleLoginResponse(xmlhttp.response)
-            }
-        }
-        xmlhttp.send(json)
-    }
+    //     var json = JSON.stringify(formData)
+    //     var xmlhttp = new XMLHttpRequest()
+    //     xmlhttp.open("POST", "login", true)
+    //     xmlhttp.setRequestHeader("Content-Type", "application/json")
+    //     xmlhttp.responseType = "json"
+    //     xmlhttp.onreadystatechange = function () {
+    //         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //             handleLoginResponse(xmlhttp.response)
+    //         }
+    //     }
+    //     xmlhttp.send(json)
+    // }
 
-    function handleLoginResponse(res) {
-        if (res.error) {
-            setTimeout(function () {
-                var alert = document.getElementById('alertLogin')
-                alert.innerText = "Błąd: " + res.error
-                alert.hidden = false
-                document.getElementById('loginButton').disabled = false
-            }, 500)
-        }
-        else {
-            window.location.href = '.'
-        }
-    }
+    // function handleLoginResponse(res) {
+    //     if (res.error) {
+    //         setTimeout(function () {
+    //             var alert = document.getElementById('alertLogin')
+    //             alert.innerText = "Błąd: " + res.error
+    //             alert.hidden = false
+    //             document.getElementById('loginButton').disabled = false
+    //         }, 500)
+    //     }
+    //     else {
+    //         window.location.href = '.'
+    //     }
+    // }
 
     function detect() {
         var documentDetectionKeys = [

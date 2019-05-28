@@ -18,6 +18,7 @@ var cookieParser = require('cookie-parser')
 var morgan = require('morgan')
 var MongoStore = require('connect-mongo')(expressSession)
 var mongoStore = new MongoStore({ mongooseConnection: mongoose.connection })
+var User = require('./models/user')
 
 app.use(express.static(path.join(__dirname, '/public')))
 
