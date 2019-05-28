@@ -160,5 +160,5 @@ app.use(function (err, req, res, next) {
 })
 
 server.listen(config.serverPort, () => {
-    log.info("Server started...")
+    log.info("Server started on " + config.serverPort + "...")
 })
