@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>StickArena</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
     <script src="js/login.js"></script>
 
@@ -28,6 +28,9 @@
         .invalid-feedback {
             display: block;
         }
+        .card {
+            display:inline-block;
+            }
     </style>
 
 </head>
@@ -43,34 +46,41 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Zarejestruj się</h5>
                         <form id="registerForm" action="/register" method="POST">
                             <div class="form-group">
                                 <label for="registerEmail">Adres e-mail</label>
-                                <input id="registerEmail" type="email" class="form-control" name="email" placeholder="Podaj e-mail" autocomplete="email">
+                                <input id="registerEmail" type="email" class="form-control" name="email"
+                                    placeholder="Podaj e-mail" autocomplete="email">
                             </div>
                             <div class="form-group">
                                 <label for="registerLogin">Login</label>
-                                <input id="registerLogin" type="text" class="form-control" name="login" placeholder="Podaj login" autocomplete="username">
-                                <div id="loginError" class="invalid-feedback" hidden>Login musi zawierać od 2 do 30 znaków</div>
+                                <input id="registerLogin" type="text" class="form-control" name="login"
+                                    placeholder="Podaj login" autocomplete="username">
+                                <div id="loginError" class="invalid-feedback" hidden>Login musi zawierać od 2 do 30
+                                    znaków</div>
                             </div>
                             <div class="form-group">
                                 <label>Hasło</label>
-                                <input id="registerPassword" type="password" class="form-control" name="password" placeholder="Podaj hasło" autocomplete="new-password">
-                                <div id="passwordError" class="invalid-feedback" hidden>Hasło musi mieć przynajmniej 8 znaków</div>
+                                <input id="registerPassword" type="password" class="form-control" name="password"
+                                    placeholder="Podaj hasło" autocomplete="new-password">
+                                <div id="passwordError" class="invalid-feedback" hidden>Hasło musi mieć przynajmniej 8
+                                    znaków</div>
                             </div>
                             <div class="form-group">
                                 <label for="repeatPassword">Powtórz hasło</label>
-                                <input id="repeatPassword" type="password" class="form-control" name="repeatPassword" placeholder="Powtórz hasło" autocomplete="new-password">
+                                <input id="repeatPassword" type="password" class="form-control" name="repeatPassword"
+                                    placeholder="Powtórz hasło" autocomplete="new-password">
                                 <div id="repeatError" class="invalid-feedback" hidden>Wpisane hasła są różne</div>
                             </div>
                             <div class="custom-control custom-checkbox mb-3">
                                 <input id="registerTerms" type="checkbox" class="custom-control-input">
                                 <label class="custom-control-label" for="registerTerms">Zaprzedaję duszę diabłu</label>
-                                <div id="termsError" class="invalid-feedback">Aby się zarejestrować należy zaakceptować regulamin</div>
+                                <div id="termsError" class="invalid-feedback">Aby się zarejestrować należy zaakceptować
+                                    regulamin</div>
                             </div>
                             <div id="alertRegister" class="alert alert-danger" role="alert" hidden></div>
                             <button id="registerButton" type="button" class=" btn btn-secondary">Zarejestruj</button>
@@ -78,11 +88,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Wybierz server:</h5>
-                    </div>
+            <div class="col-md-6">
+                <h5 class="card-title">Wybierz server:</h5>
+                <div class="row card w-100" id="serverRow">
                 </div>
             </div>
         </div>

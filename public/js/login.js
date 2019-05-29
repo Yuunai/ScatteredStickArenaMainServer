@@ -8,8 +8,6 @@ window.onload = function () {
     var registerButton = document.getElementById('registerButton')
     registerButton.addEventListener('click', register)
 
-    // var loginButton = document.getElementById('loginButton')
-    loginButton.addEventListener('click', login)
 
     var registerEmail = document.getElementById('registerEmail')
     registerEmail.addEventListener('keyup', callCheckEmail)

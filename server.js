@@ -11,6 +11,8 @@ mongoose.connect(config.dbUrl)
 var express = require('express')
 var app = express()
 
+var fs = require('file-system')
+
 var passport = require('passport')
 var expressSession = require('express-session')
 var bodyParser = require('body-parser')
@@ -50,6 +52,37 @@ function onAuthorizeFail(data, message, error, accept) {
     console.log(message)
     if (error)
         accept(new Error(message));
+}
+
+function insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+}
+
+function servTimeout(serv) {
+    console.log("pinging server " + serv.serverIdentifier)
+    request('http://' + serv.serverAddress + ':' + serv.serverPort + '/stillAlive', function (error, response, body) {
+
+        if (!error && response.statusCode == 200) {
+            console.log('OK - server: ', serv.serverIdentifier);
+
+            setTimeout(function () { servTimeout(serv) }, 15000)
+        }
+        else {
+            console.log('error:', error);
+            fs.readFile('./html/main.html', 'utf-8', (err, data) => {
+                if (err) throw err;
+                console.log("Removing server " + serv.serverIdentifier)
+                fs.writeFile('./html/main.html',
+                    data.replace('<!--START' + serv.serverIdentifier + '--><div class="card col-md-5 mx-3 my-3 text-center" id="server' + serv.serverIdentifier + '"><div class="card-body"><h2>Serwer ' + serv.serverIdentifier + '</h2><p>' + serv.serverDescription + '</p><p><a class="btn btn-secondary" href="http://' + serv.serverAddress + ':' + serv.serverPort + '" role="button">Dołącz</a></p></div></div><!--END' + serv.serverIdentifier + '-->'
+                        , ""),
+                    function (err) {
+                        if (err) throw err;
+                    })
+
+
+            });
+        }
+    });
 }
 
 app.get('/activation', login.isLoggedIn, (req, res) => {
@@ -101,6 +134,32 @@ app.post('/authUser', (req, res) => {
     })
 })
 
+app.post('/newServer', (req, res) => {
+
+    fs.readFile('./html/main.html', 'utf-8', (err, data) => {
+        if (err) throw err;
+        if (data.search('<div class="card col-md-5 mx-3 my-3 text-center" id="server' + req.body.serverIdentifier + '">') != -1) {
+            console.log("Server " + serv.serverIdentifier + "is on a list")
+        }
+        else {
+            var cardsString = '<div class="row card w-100" id="serverRow">'
+            var cardsPos = data.search(cardsString)
+            console.log("Adding server " + req.body.serverIdentifier)
+            fs.writeFile('./html/main.html',
+                insert(data, cardsPos + cardsString.length,
+                    '<!--START' + req.body.serverIdentifier + '--><div class="card col-md-5 mx-3 my-3 text-center" id="server' + req.body.serverIdentifier + '"><div class="card-body"><h2>Serwer ' + req.body.serverIdentifier + '</h2><p>' + req.body.serverDescription + '</p><p><a class="btn btn-secondary" href="http://' + req.body.serverAddress + ':' + req.body.serverPort + '" role="button">Dołącz</a></p></div></div><!--END' + req.body.serverIdentifier + '-->'
+                ),
+                function (err) {
+                    if (err) throw err;
+                })
+            setTimeout(function () { servTimeout(req.body) }, 15000);
+        }
+
+    });
+
+    return res.status(200).send("OK")
+})
+
 app.post('/login', log.logActivity, (req, res, next) => {
     passport.authenticate('local-login', function (err, user, info) {
         if (err) return next(err)
@@ -144,7 +203,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/admin/:token', (req, res) => {
 
-    if(req.params.token === config.adminToken)
+    if (req.params.token === config.adminToken)
         res.sendFile(path.join(__dirname, "access.log"))
     else
         res.status(403).send("Access Denied")
