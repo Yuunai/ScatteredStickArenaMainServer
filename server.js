@@ -139,7 +139,7 @@ app.post('/newServer', (req, res) => {
     fs.readFile('./html/main.html', 'utf-8', (err, data) => {
         if (err) throw err;
         if (data.search('<div class="card col-md-5 mx-3 my-3 text-center" id="server' + req.body.serverIdentifier + '">') != -1) {
-            console.log("Server " + serv.serverIdentifier + "is on a list")
+            console.log("Server " + req.body.serverIdentifier + " is on a list")
         }
         else {
             var cardsString = '<div class="row card w-100" id="serverRow">'
